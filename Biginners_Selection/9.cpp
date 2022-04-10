@@ -2,12 +2,59 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (n); i++)
 
-bool check(string S, int j, int n){
-    if(S.size() == j + n){
-        return 1;    
+// Sのi文字目ががdでもeでもない時0
+bool eord(string S, int i){
+    if(S.at(i) == 'e' || S.at(i) == 'd'){
+        return 1;
     }
     return 0;
 }
+
+void check(string S, vector<int>& ok, int n){
+    if(S.at(n) == 'd'){
+        if(S.substr(n,5) == "dream"){
+            ok.push_back(n+4);
+        }
+        if(S.substr(n,7) == "dreamer"){
+            ok.push_back(n+6);
+        }
+    }
+    if(S.at(n) == 'e'){
+        if(S.substr(n,5) == "erase"){
+            ok.push_back(n+4);
+        }
+        if(S.substr(n,6) == "eraser"){
+            ok.push_back(n+5);
+        }
+    }
+}
+
+// void check_saiki(string S, vector<int>& ok, int n){
+//     if(n == int(S.size())-8){
+//         cout << "YES" << endl;
+//         return;
+//     }
+//     if(S.at(n) == 'd'){
+//         if(S.substr(n,5) == "dream"){
+//             ok.push_back(n+4);
+//             check_saiki(S, ok, int(ok.back()));
+//         }
+//         if(S.substr(n,7) == "dreamer"){
+//             ok.push_back(n+6);
+//             check_saiki(S, ok, int(ok.back()));
+//         }
+//     }
+//     if(S.at(n) == 'e'){
+//         if(S.substr(n,5) == "erase"){
+//             ok.push_back(n+4);
+//             check_saiki(S, ok, int(ok.back()));
+//         }
+//         if(S.substr(n,6) == "eraser"){
+//             ok.push_back(n+5);
+//             check_saiki(S, ok, int(ok.back()));
+//         }
+//     }
+// }
 
 int main (void){
     // ifstream in("./../input.txt");
@@ -15,56 +62,37 @@ int main (void){
 
     string S;
     cin >> S;
-    
-    // dp[i][j]:nはSのj文字目からチェック。i回目にSのj文字以降ができれば1
-    vector<vector<int>> dp((100000/5), vector<int>(S.size()));
+    rep(i, 7) S.push_back('z');
+    int Ss = S.size();
+    // cout << S << endl;
 
-    dp.at(0).at(0) = 1;
+    vector<int> OK;
 
-    rep(i, 100000/5){
-        rep(j, S.size()){
-            if(dp.at(i).at(j) == 1){
-                if(S.size() - j >= 5){
-                    if(S.substr(j,5) == "dream"){
-                        if(check(S, j, 5)){
-                            cout << "Yes" << endl;
-                            return 0;
-                        }
-                        dp.at(i+1).at(j+5) = 1;
-                    }
-                }
-                if(S.size() - j >= 7){
-                    if(S.substr(j,7) == "dreamer"){
-                        if(check(S, j, 7)){
-                            cout << "Yes" << endl;
-                            return 0;
-                        }
-                        dp.at(i+1).at(j+7) = 1;
-                    }
-                }
-                if(S.size() - j >= 5){
-                    if(S.substr(j,5) == "erase"){
-                        if(check(S, j, 5)){
-                            cout << "Yes" << endl;
-                            return 0;
-                        }
-                        dp.at(i+1).at(j+5) = 1;
-                    }
-                }
-                if(S.size() - j >= 6){
-                    if(S.substr(j,6) == "eraser"){
-                        if(check(S, j, 6)){
-                            cout << "Yes" << endl;
-                            return 0;
-                        }
-                        dp.at(i+1).at(j+6) = 1;
-                    }
-                }
+    // if(eord(S, 0)){
+    //     check_saiki(S, OK, 0);
+    // }else{
+    //     cout << "NO" << endl;
+    // }
+
+    // return 0;
+
+
+    rep(i, Ss){
+        int OKs = OK.size();
+        if(OKs > 0){
+            if(*max_element(OK.begin(), OK.end()) == Ss-8){
+                cout << "YES" << endl;
+                rep(i, OKs) cout << OK.at(i) << endl;
+                return 0;
             }
         }
+        if(eord(S,i)) check(S, OK, i);
+        rep(j, OKs){
+            if(eord(S, OK.at(j)+1)) check(S, OK, OK.at(j)+1);
+        }
     }
-
-    cout << "No" << endl;
+    
+    cout << "NO" << endl;
 
     return 0;
 }
