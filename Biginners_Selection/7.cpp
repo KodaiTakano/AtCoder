@@ -5,7 +5,6 @@ using namespace std;
 int main (void){
     // ifstream in("./../input.txt");
     // cin.rdbuf(in.rdbuf());
-
     int N;
     cin >> N;
     vector<int> d(N);

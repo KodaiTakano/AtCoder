@@ -3,7 +3,6 @@ using namespace std;
 
 int main (void){
     int N, A, B;
-
     cin >> N >> A >> B;
 
     int sum_answer = 0;
@@ -15,9 +14,7 @@ int main (void){
             n = n / 10;
             // cout << sum_10 << endl;
         }
-        if(A <= sum_10 && sum_10 <= B){
-            sum_answer += i;
-        }
+        if(A <= sum_10 && sum_10 <= B) sum_answer += i;
     }
     cout << sum_answer << endl;
 

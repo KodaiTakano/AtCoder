@@ -11,7 +11,6 @@ int main (void){
     }
 
     int count = 0;
-
     for(int j = 0; j < 1000000000; j++){
         for(int i = 0; i < N; i++){
             if(A.at(i) % 2 != 0){

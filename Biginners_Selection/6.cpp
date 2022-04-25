@@ -32,7 +32,6 @@ int main (void){
         }
         answer += max1 - max2;
     }
-
     cout << answer << endl;
 
     return 0;

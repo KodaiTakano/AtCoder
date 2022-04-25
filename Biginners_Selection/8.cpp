@@ -27,6 +27,7 @@ int main (void){
 
     cout << "check" << endl;
 
+
     if(dp.at(N).at(Y) == 1){
 
     }else{

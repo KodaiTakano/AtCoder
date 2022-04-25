@@ -45,7 +45,6 @@ int main (void){
             }
         }
     }
-
     cout << "Yes" << endl;
 
     return 0;

@@ -76,7 +76,6 @@ int main (void){
 
     // return 0;
 
-
     rep(i, Ss){
         int OKs = OK.size();
         if(OKs > 0){

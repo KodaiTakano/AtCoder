@@ -8,8 +8,7 @@ int main (void){
     cin >> C;
     cin >> X;
 
-    int sum;
-    int count = 0;
+    int sum, count = 0;
     for(int i = 0; i < A+1; i++){
         for(int j = 0; j < B+1; j++){
             for(int k = 0; k < C+1; k++){
