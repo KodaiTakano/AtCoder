@@ -10,12 +10,21 @@ int main (void){
     // cin.rdbuf(in.rdbuf());
 
     string S;
-    cin >> S;
-    if(S=="Hello,World!"){
-        cout << "AC" << endl;
-    }else{
-        cout << "WA" << endl;
-    }
+    int K;
+    cin >> S >> K;
+
+    vector<char> s(S.size());
+    rep(i, S.size()) s.at(i)=S.at(i);
+    sort(all(s));
+
+    ll count=1;
+    do{
+        if(count==K){
+            rep(i, s.size()) { cout << s.at(i); }
+            cout << endl;
+        }
+        count++;
+    }while(next_permutation(all(s)));
 
     return 0;
 }
